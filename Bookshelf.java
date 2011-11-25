@@ -1,0 +1,159 @@
+import java.util.Scanner;
+
+/**********************************************
+ * 
+ * 25.11.2011
+ * 
+ * @author miksa
+ * 
+ */
+public class Bookshelf {
+	/**
+	 * Tietokanta ilmentyma . Tietokanta maaritellaan main metodissa.
+	 */
+	private static Tietokanta tk;
+	/**
+	 * Scanner luokan kayttaanotto
+	 */
+	public static Scanner lukija = new Scanner(System.in);
+
+	/**
+	 * 
+	 * @param schema
+	 * @param user
+	 * @param pass
+	 */
+	public Bookshelf(String schema, String user, String pass) {
+		try {
+			tk = new Tietokanta();
+			tk.createConnection(schema, user, pass);
+			// start configuration
+			tk.poistaBookTaulu();
+			tk.luoBookTaulu();
+			// tk.luoWriterTaulu();
+		} catch (Exception e) {
+			System.out.println("Bookshelf: error");
+		}
+	}
+
+	/**
+	 * main metodi sisaltaa kayttaliittyman
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Bookshelf kirjahylly = new Bookshelf("Bookshelf", "librarian",
+				"salasana");
+		boolean lukitus = true;
+		try {
+			int valinta = 1;
+			while (valinta != 0) {
+				System.out.println("**Bookshelf**");
+				System.out.println("1) Add book");
+				
+				//Not implemented
+				System.out.println("2) Print books");
+				System.out.println("3) Find book");
+				System.out.println("4) Muuta hintoja");
+				System.out.println("5) Tulosta asiakkaat ja tuotteet");
+				System.out.println("6) Tulosta tuotteet");
+				System.out.println("7) Muuta tuotteen hintaa");
+				System.out.println("90) Admin lukitus");
+				System.out
+						.println("91) LuoTaulut\n92) PudotaTaulut\n0) Lopeta");
+				valinta = Integer.parseInt(lukija.nextLine());
+				switch (valinta) {
+				case 1:
+					
+					String nimi;
+					
+					int ano;
+					System.out.println("Anna kirjan nimi! ");
+					nimi = lukija.nextLine();
+					 System.out.println("Anna hinta! ");
+					float price = lukija.nextFloat();
+					lukija.nextLine();
+					System.out.println("anna kirjailijan numero! ");
+					int wno = Integer.parseInt(lukija.nextLine());
+					
+					String isbn1=" ";
+					System.out.println("anna vuosiluku! ");
+					int year = Integer.parseInt(lukija.nextLine());
+					
+					addBook(nimi, isbn1, year, price, wno);
+					break;
+				case 2:
+					tk.tulostaAsiakkaat();
+					break;
+				case 3:
+					System.out.println("Anna asiakas numero!");
+					int asno = lukija.nextInt();
+					lukija.nextLine();
+					System.out.println(tk.etsiAsiakasNumero(asno));
+					break;
+				case 4:
+					System.out
+							.println("Anna hinnoille muutosprosentti desimaalilukuna ( 0.5 = 50% )");
+					float korotus = lukija.nextFloat();
+					lukija.nextLine();
+					tk.modifyPrices(korotus);
+					break;
+				case 5:
+					tk.tulostaAsiakkaanTuotteet();
+					break;
+				case 6:
+					tk.tulostaTuotteet();
+					break;
+				case 7:
+					System.out.println("Anna muutettavan tuotteen numero!");
+					int tid = lukija.nextInt();
+					lukija.nextLine();
+					System.out.println("Anna tuotteelle uusihinta");
+					float uusiHinta = lukija.nextFloat();
+					lukija.nextLine();
+					tk.muutaTuotteenHinta(tid, uusiHinta);
+					break;
+				case 90:
+					System.out.println("Lukituksen poistu K/E");
+					char lukko = lukija.nextLine().charAt(0);
+					if (lukko == 'K') {
+						System.out.println("Lukitus poistettu");
+						lukitus = false;
+					} else if (lukitus) {
+						System.out.println("Lukitus päällä");
+						lukitus = true;
+					}
+
+					break;
+				case 91:
+					tk.luoBookTaulu();
+					break;
+				case 92:
+					tk.poistaBookTaulu();
+					break;
+
+				case 0:
+					break;
+				default:
+					System.out.println("valitse uudelleen! ");
+				}
+			}
+			// tk.tulostaAsiakkaat();
+			// tk .tulostaAsiakkaanTuotteet();
+			tk.suljeYhteys();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("virhe");
+		}
+	}
+
+	public static void addBook(String nimi, String isbn1, int year,
+			float price, int wno) {
+		try {
+			tk.addBook(nimi, isbn1, year, price, wno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("addBook:virhe");
+		}
+	}
+}
