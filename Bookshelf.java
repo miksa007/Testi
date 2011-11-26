@@ -49,42 +49,63 @@ public class Bookshelf {
 			int valinta = 1;
 			while (valinta != 0) {
 				System.out.println("**Bookshelf**");
-				System.out.println("1) Add book");
-				
-				//Not implemented
-				System.out.println("2) Print books");
-				System.out.println("3) Find book");
-				System.out.println("4) Muuta hintoja");
-				System.out.println("5) Tulosta asiakkaat ja tuotteet");
-				System.out.println("6) Tulosta tuotteet");
-				System.out.println("7) Muuta tuotteen hintaa");
+				System.out.println("11) Add book");
+
+				System.out.println("12) Print books");
+
+				System.out.println("21) Add writer");
+				System.out.println("22) Print writers");
+				// Not implemented
+
+//				System.out.println("3) Find book");
+	//			System.out.println("4) Muuta hintoja");
+		//		System.out.println("5) Tulosta asiakkaat ja tuotteet");
+			//	System.out.println("6) Tulosta tuotteet");
+				//System.out.println("7) Muuta tuotteen hintaa");
 				System.out.println("90) Admin lukitus");
 				System.out
 						.println("91) LuoTaulut\n92) PudotaTaulut\n0) Lopeta");
 				valinta = Integer.parseInt(lukija.nextLine());
 				switch (valinta) {
-				case 1:
-					
+				case 11:
+
 					String nimi;
-					
+
 					int ano;
 					System.out.println("Anna kirjan nimi! ");
 					nimi = lukija.nextLine();
-					 System.out.println("Anna hinta! ");
+					System.out.println("Anna hinta! ");
 					float price = lukija.nextFloat();
 					lukija.nextLine();
 					System.out.println("anna kirjailijan numero! ");
 					int wno = Integer.parseInt(lukija.nextLine());
-					
-					String isbn1=" ";
+
+					String isbn1 = " ";
 					System.out.println("anna vuosiluku! ");
 					int year = Integer.parseInt(lukija.nextLine());
-					
+
 					addBook(nimi, isbn1, year, price, wno);
 					break;
-				case 2:
-					tk.tulostaAsiakkaat();
+				case 12:
+					tk.printBooks();
 					break;
+				// add writer
+				case 21:
+
+					String enimi;
+					String snimi;
+
+					System.out.println("Anna kirjailijan etunimi! ");
+					enimi = lukija.nextLine();
+					System.out.println("Anna kirjailijan sukunimi! ");
+					snimi = lukija.nextLine();
+
+					addWriter(enimi, snimi);
+					break;
+				case 22:
+					tk.printWriters();
+					break;
+
 				case 3:
 					System.out.println("Anna asiakas numero!");
 					int asno = lukija.nextInt();
@@ -156,4 +177,14 @@ public class Bookshelf {
 			System.out.println("addBook:virhe");
 		}
 	}
+
+	public static void addWriter(String ename, String sname) {
+		try {
+			tk.addWriter(ename, sname);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("addWriter:virhe");
+		}
+	}
+
 }

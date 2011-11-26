@@ -1,0 +1,24 @@
+github test Project
+
+versio 0.3	26.11.2011
+
+READY:
+
+  MySQL:
+  BOOK MySQL table
+  WRITER Mysql table
+
+ Bookshelf.java:
+  addbook method
+  
+ Tietokanta.java
+  void luoBookTaulu()
+  void poistaBookTaulu()
+  public void printWriters()
+
+TODO:
+remove()
+find()
+change()
+
+GUI for all

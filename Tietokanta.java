@@ -48,11 +48,11 @@ public class Tietokanta {
 		try {
 			stmt = con.createStatement();
 
-			sql = "CREATE TABLE BOOK ("
+			sql = "CREATE TABLE BOOKS ("
 					+ " BNO   INTEGER   NOT NULL AUTO_INCREMENT PRIMARY KEY,"
-					+ " NIMI VARCHAR(40) NOT NULL,"
-					+ " ISBN1 VARCHAR(40) NOT NULL," + " ISBN2 VARCHAR(40),"
-					+ " ISBN3 VARCHAR(40)," + " YEAR INTEGER,"
+					+ " NAME VARCHAR(40) NOT NULL,"
+					+ " ISBN1 VARCHAR(40) NOT NULL," + " FIELD1 VARCHAR(40),"
+					+ " FIELD2 VARCHAR(40)," + " YEAR INTEGER,"
 					+ " PRICE FLOAT NOT NULL," + " WNO INTEGER NOT NULL)";
 			stmt.executeUpdate(sql);
 		} catch (SQLException se) {
@@ -73,7 +73,7 @@ public class Tietokanta {
 		Statement stmt = null;
 		try {
 			stmt = con.createStatement();
-			sql = "DROP TABLE BOOK";
+			sql = "DROP TABLE BOOKS";
 			stmt.executeUpdate(sql);
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -97,9 +97,9 @@ public class Tietokanta {
 			stmt = con.createStatement();
 
 			sql = "CREATE TABLE WRITER ("
-					+ " WNO   INTEGER   NOT NULL PRIMARY KEY,"
-					+ " FNIMI VARCHAR(40) NOT NULL,"
-					+ " LNIMI VARCHAR(40) NOT NULL,"
+					+ " WNO   INTEGER   NOT NULL AUTO_INCREMENT PRIMARY KEY,"
+					+ " FNAME VARCHAR(40) NOT NULL,"
+					+ " LNAME VARCHAR(40) NOT NULL,"
 					+ " FIELD1 VARCHAR(40) NOT NULL,"
 					+ " FIELD2 VARCHAR(40) NOT NULL,"
 					+ " IFIELD INTEGER NOT NULL)";
@@ -136,11 +136,11 @@ public class Tietokanta {
 
 	public void addBook(String nimi, String isbn1, int year, float price,
 			int wno) throws Exception {
-		String sql;
+		
 		PreparedStatement addbook = null;
 		try {
 			addbook = con
-					.prepareStatement("INSERT INTO BOOK (NIMI, ISBN1, ISBN2, ISBN3, YEAR, PRICE, WNO) VALUES (?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO BOOKS (NAME, ISBN1, FIELD1, FIELD2, YEAR, PRICE, WNO) VALUES (?,?,?,?,?,?,?)");
 
 			addbook.setString(1, nimi);
 			addbook.setString(2, isbn1);
@@ -158,6 +158,27 @@ public class Tietokanta {
 		} finally {
 			if (addbook != null)
 				addbook.close();
+		}
+	}
+	public void addWriter(String enimi, String snimi) throws Exception {
+		
+		PreparedStatement addwriter = null;
+		try {
+			addwriter = con.prepareStatement("INSERT INTO WRITER (FNAME, LNAME, FIELD1, FIELD2, IFIELD) VALUES (?,?,?,?,?)");
+			addwriter.setString(1, enimi);
+			addwriter.setString(2, snimi);
+			addwriter.setString(3, " ");
+			addwriter.setString(4, " ");
+			addwriter.setInt(5, 0);
+
+			addwriter.executeUpdate();
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw new Exception(
+					"addWriter:Tiedon lisaaminen writer Tauluun epaonnistui .");
+		} finally {
+			if (addwriter != null)
+				addwriter.close();
 		}
 	}
 
@@ -234,32 +255,56 @@ public class Tietokanta {
 		}
 	}
 
-	public void tulostaAsiakkaat() throws Exception {
+	public void printBooks() throws Exception {
 		// Kysely kantaan
 		String sql;
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = con.createStatement();
-			sql = "SELECT * FROM ASIAKKAAT";
+			sql = "SELECT * FROM BOOKS";
 			rs = stmt.executeQuery(sql);
 			System.out.println("Tulostus alkoi");
 			while (rs.next()) {
-				int id = rs.getInt("ANO");
-				String enimi = rs.getString("ENIMI");
-				String snimi = rs.getString("SNIMI");
+				int id = rs.getInt("BNO");
+				String enimi = rs.getString("NAME");
+				//String snimi = rs.getString("SNIMI");
 
-				System.out.println(id + " " + enimi + " " + snimi);
+				System.out.println(id + " " + enimi );
 
 			}
 			rs.close();
 		} catch (SQLException se) {
 			se.printStackTrace();
-			System.out.println("Virhe");
+			System.out.println("printBooks: Virhe");
 
 		}
 	}
+	public void printWriters() throws Exception {
+		// Kysely kantaan
+		String sql;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			sql = "SELECT * FROM WRITER";
+			rs = stmt.executeQuery(sql);
+			System.out.println("Tulostus alkoi");
+			while (rs.next()) {
+				int id = rs.getInt("WNO");
+				String enimi = rs.getString("FNAME");
+				String snimi = rs.getString("SNAME");
 
+				System.out.println(id + " " + enimi+" "+snimi );
+
+			}
+			rs.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+			System.out.println("printWriters: Virhe");
+
+		}
+	}
 	public void tulostaAsiakkaanTuotteet() throws Exception {
 		// Kysely kantaan
 		String sql;
