@@ -27,10 +27,13 @@ public class Bookshelf {
 		try {
 			tk = new Tietokanta();
 			tk.createConnection(schema, user, pass);
+			
 			// start configuration
-			tk.poistaBookTaulu();
-			tk.luoBookTaulu();
-			// tk.luoWriterTaulu();
+			//Should I remove these?
+			//tk.poistaBookTaulu();
+			//tk.luoBookTaulu();
+			//tk.poistaWriterTaulu();
+			//tk.luoWriterTaulu();
 		} catch (Exception e) {
 			System.out.println("Bookshelf: error");
 		}
@@ -55,6 +58,8 @@ public class Bookshelf {
 
 				System.out.println("21) Add writer");
 				System.out.println("22) Print writers");
+				
+				System.out.println("51) Print books ordered by writers");
 				// Not implemented
 
 //				System.out.println("3) Find book");
@@ -119,8 +124,8 @@ public class Bookshelf {
 					lukija.nextLine();
 					tk.modifyPrices(korotus);
 					break;
-				case 5:
-					tk.tulostaAsiakkaanTuotteet();
+				case 51:
+					tk.printBooksOrderedByWriter();
 					break;
 				case 6:
 					tk.tulostaTuotteet();

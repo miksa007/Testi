@@ -1,6 +1,17 @@
 github test Project
 
+versio 0.5	17.11.2011
+
+versio 0.4	26.11.2011
+	Changes for database
 versio 0.3	26.11.2011
+
+Tiedostot:
+README
+Bookself.java
+Tietokanta.java
+bookself.sql
+
 
 READY:
 
@@ -22,3 +33,29 @@ find()
 change()
 
 GUI for all
+
+
+Other::
+MySQL tables Version 0.4:
+More about database at bookself.sql
+CREATE TABLE BOOKS ( 
+	BNO   INTEGER   NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+	NAME VARCHAR(40) NOT NULL, 
+	ORIGNAME VARCHAR(40) , 
+	LANGUAGE VARCHAR(40) , 
+	ISBN1 VARCHAR(40) , 
+	FIELD1 VARCHAR(40), 
+	FIELD2 VARCHAR(40), 
+	YEAR INTEGER, 
+	PURCHASEPRICE FLOAT NOT NULL, 
+	SELLPRICE FLOAT NOT NULL, 
+	WNO INTEGER NOT NULL)
+
+CREATE TABLE WRITER ( 
+	WNO   INTEGER   NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+	FNAME VARCHAR(40) NOT NULL, 
+	LNAME VARCHAR(40) NOT NULL, 
+	FIELD1 VARCHAR(40), 
+	FIELD2 VARCHAR(40), 
+	IFIELD INTEGER)
+
