@@ -71,7 +71,7 @@ public class Bookshelf {
 				System.out.println("91) LuoTaulut(Books, Writers)");
 				System.out.println("92) PudotaTaulut(Books, Writers )");
 				System.out.println("\n0) Lopeta");
-				
+
 				valinta = Integer.parseInt(lukija.nextLine());
 				switch (valinta) {
 				case 11:
@@ -105,7 +105,7 @@ public class Bookshelf {
 
 					System.out.println("Anna kirjailijan etunimi! ");
 					enimi = lukija.nextLine();
-					
+
 					System.out.println("Anna kirjailijan sukunimi! ");
 					snimi = lukija.nextLine();
 
