@@ -16,7 +16,14 @@ import java.sql.PreparedStatement;
 
 public class Tietokanta {
 	private Connection con;
-
+/**
+ * Luodaan yhteys tietokantaan
+ * 
+ * @param schema
+ * @param user
+ * @param pass
+ * @throws Exception
+ */
 	public void createConnection(String schema, String user, String pass)
 			throws Exception {
 		try {

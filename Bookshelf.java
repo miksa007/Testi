@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class Bookshelf {
 	/**
-	 * Tietokanta ilmentyma . Tietokanta maaritellaan main metodissa.
+	 * Tietokanta ilmentyma. Tietokanta maaritellaan main metodissa.
 	 */
 	private static Tietokanta tk;
 	/**
@@ -27,13 +27,13 @@ public class Bookshelf {
 		try {
 			tk = new Tietokanta();
 			tk.createConnection(schema, user, pass);
-			
+
 			// start configuration
-			//Should I remove these?
-			//tk.poistaBookTaulu();
-			//tk.luoBookTaulu();
-			//tk.poistaWriterTaulu();
-			//tk.luoWriterTaulu();
+			// Should I remove these?
+			// tk.poistaBookTaulu();
+			// tk.luoBookTaulu();
+			// tk.poistaWriterTaulu();
+			// tk.luoWriterTaulu();
 		} catch (Exception e) {
 			System.out.println("Bookshelf: error");
 		}
@@ -58,18 +58,20 @@ public class Bookshelf {
 
 				System.out.println("21) Add writer");
 				System.out.println("22) Print writers");
-				
+
 				System.out.println("51) Print books ordered by writers");
 				// Not implemented
 
-//				System.out.println("3) Find book");
-	//			System.out.println("4) Muuta hintoja");
-		//		System.out.println("5) Tulosta asiakkaat ja tuotteet");
-			//	System.out.println("6) Tulosta tuotteet");
-				//System.out.println("7) Muuta tuotteen hintaa");
+				// System.out.println("3) Find book");
+				// System.out.println("4) Muuta hintoja");
+				// System.out.println("5) Tulosta asiakkaat ja tuotteet");
+				// System.out.println("6) Tulosta tuotteet");
+				// System.out.println("7) Muuta tuotteen hintaa");
 				System.out.println("90) Admin lukitus");
-				System.out
-						.println("91) LuoTaulut\n92) PudotaTaulut\n0) Lopeta");
+				System.out.println("91) LuoTaulut(Books, Writers)");
+				System.out.println("92) PudotaTaulut(Books, Writers )");
+				System.out.println("\n0) Lopeta");
+				
 				valinta = Integer.parseInt(lukija.nextLine());
 				switch (valinta) {
 				case 11:
@@ -82,6 +84,7 @@ public class Bookshelf {
 					System.out.println("Anna hinta! ");
 					float price = lukija.nextFloat();
 					lukija.nextLine();
+					tk.printWriters();
 					System.out.println("anna kirjailijan numero! ");
 					int wno = Integer.parseInt(lukija.nextLine());
 
@@ -102,6 +105,7 @@ public class Bookshelf {
 
 					System.out.println("Anna kirjailijan etunimi! ");
 					enimi = lukija.nextLine();
+					
 					System.out.println("Anna kirjailijan sukunimi! ");
 					snimi = lukija.nextLine();
 
@@ -153,9 +157,11 @@ public class Bookshelf {
 					break;
 				case 91:
 					tk.luoBookTaulu();
+					tk.luoWriterTaulu();
 					break;
 				case 92:
 					tk.poistaBookTaulu();
+					tk.poistaWriterTaulu();
 					break;
 
 				case 0:
