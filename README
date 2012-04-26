@@ -1,4 +1,8 @@
 github test Project
+versio 0.71	26.4.2012
+       Added: Tietokanta.java returns Writers data to Bookshelf.
+       Added: Writers Jlist in main window. Insert and JList update works also.
+       Some minory changes to Bookshelf.java 
 versio 0.7	25.4.2012
        Näyttöjä tuotu mukaan
        TODO: dokumentointi ja arkkitehtuurin uudelleen mietintä...

@@ -48,8 +48,16 @@ public class Bookshelf {
 		Bookshelf kirjahylly = new Bookshelf("Bookshelf", "librarian",
 				"salasana");
 		boolean lukitus = true;
+		//
+		Naytto toosa = new Naytto(kirjahylly);
+		toosa.setVisible(true);
+
+		// testaus
+
+		// testaus Loppui
+
 		try {
-			int valinta = 1;
+			int valinta = 0;// meneeko silmukkaan??
 			while (valinta != 0) {
 				System.out.println("**Bookshelf**");
 				System.out.println("11) Add book");
@@ -172,7 +180,7 @@ public class Bookshelf {
 			}
 			// tk.tulostaAsiakkaat();
 			// tk .tulostaAsiakkaanTuotteet();
-			tk.suljeYhteys();
+			// tk.suljeYhteys();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("virhe");
@@ -191,6 +199,7 @@ public class Bookshelf {
 
 	public static void addWriter(String ename, String sname) {
 		try {
+
 			tk.addWriter(ename, sname);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -198,4 +207,19 @@ public class Bookshelf {
 		}
 	}
 
+	public static String[] getWriters() {
+		try {
+			return tk.getWriters();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("getWriters:virhe");
+		}
+		return null;
+
+	}
+
+	public static void suljeYhteys() {
+		System.out.println("");
+		tk.suljeYhteys();
+	}
 }

@@ -13,17 +13,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 //import java.util.Scanner;
 import java.sql.PreparedStatement;
+import java.util.concurrent.CountDownLatch;
 
 public class Tietokanta {
 	private Connection con;
-/**
- * Luodaan yhteys tietokantaan
- * 
- * @param schema
- * @param user
- * @param pass
- * @throws Exception
- */
+
+	/**
+	 * Luodaan yhteys tietokantaan
+	 * 
+	 * @param schema
+	 * @param user
+	 * @param pass
+	 * @throws Exception
+	 */
 	public void createConnection(String schema, String user, String pass)
 			throws Exception {
 		try {
@@ -258,6 +260,7 @@ public class Tietokanta {
 	}
 
 	public void suljeYhteys() {
+		System.out.println("DEBUG: tietokantayhteys suljettiin");
 		try {
 			if (con != null)
 				con.close();
@@ -324,11 +327,11 @@ public class Tietokanta {
 		ResultSet rs = null;
 		try {
 			stmt = con.createStatement();
-			sql = "SELECT Bookshelf.BOOKS.BNO, Bookshelf.BOOKS.NAME," +
-					" Bookshelf.BOOKS.WNO, Bookshelf.WRITER.FNAME, " +
-					"Bookshelf.WRITER.LNAME FROM Bookshelf.BOOKS, " +
-					"Bookshelf.WRITER where Bookshelf.BOOKS.WNO = " +
-					"Bookshelf.WRITER.WNO ORDER BY Bookshelf.WRITER.LNAME; ";
+			sql = "SELECT Bookshelf.BOOKS.BNO, Bookshelf.BOOKS.NAME,"
+					+ " Bookshelf.BOOKS.WNO, Bookshelf.WRITER.FNAME, "
+					+ "Bookshelf.WRITER.LNAME FROM Bookshelf.BOOKS, "
+					+ "Bookshelf.WRITER where Bookshelf.BOOKS.WNO = "
+					+ "Bookshelf.WRITER.WNO ORDER BY Bookshelf.WRITER.LNAME; ";
 
 			rs = stmt.executeQuery(sql);
 			System.out.println(sql);
@@ -337,9 +340,9 @@ public class Tietokanta {
 				String enimi = rs.getString("NAME");
 				String snimi = rs.getString("FNAME");
 				String nimi = rs.getString("LNAME");
-				
-				System.out
-						.println(id +"\t"+enimi + "\t" + snimi + "\t" + nimi );
+
+				System.out.println(id + "\t" + enimi + "\t" + snimi + "\t"
+						+ nimi);
 
 			}
 			rs.close();
@@ -348,6 +351,59 @@ public class Tietokanta {
 			System.out.println("Virhe");
 
 		}
+	}
+
+	public String[] getWriters() throws Exception {
+		int count=0;
+		//Haetaan rivien lukumaara
+		String sql = "SELECT COUNT(*) AS rowcount FROM Bookshelf.WRITER";
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			rs.next();
+			count = rs.getInt("rowcount") ;
+			System.out.println("DEBUG:"+count);
+			rs.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+			System.out.println("Virhe");
+		}
+		
+		String data[]=new String[count];
+		// Kysely kantaan
+
+		stmt = null;
+		rs = null;
+		try {
+			int i=0;
+			stmt = con.createStatement();
+			sql = "SELECT Bookshelf.WRITER.FNAME, "
+					+ "Bookshelf.WRITER.LNAME FROM Bookshelf.WRITER ";
+
+			rs = stmt.executeQuery(sql);
+			System.out.println(sql);
+			while (rs.next()) {
+				String enimi = rs.getString("FNAME");
+				String snimi = rs.getString("LNAME");
+
+				data[i]= (enimi + "  " + snimi);
+				System.out.println(i+". "+ enimi + " " + snimi);
+				i++;
+			}
+			rs.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+			System.out.println("Virhe");
+
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
+		}
+
+		return data;
 	}
 
 	/**

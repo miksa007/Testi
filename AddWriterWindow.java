@@ -152,6 +152,9 @@ public class AddWriterWindow extends javax.swing.JFrame {
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 		System.out.println("Debug: Cancel");
+		jTextField1.setText("");
+		jTextField2.setText("");
+		this.setVisible(false);
 	}
 
 	/**
