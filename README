@@ -1,4 +1,11 @@
 github test Project
+version 0.72	4.5.2012
+	NEW SOURCE: AddBookWindow.java
+	    User can add books to database	    	  
+	minory changes Tietokanta.java:
+	       getWriters returns writers in ascending order
+	minory changes MainWindow.java
+	       jScrollPane1 get more width	       
 versio 0.71	26.4.2012
        Added: Tietokanta.java returns Writers data to Bookshelf.
        Added: Writers Jlist in main window. Insert and JList update works also.
@@ -14,11 +21,14 @@ versio 0.4	26.11.2011
 	Changes for database
 versio 0.3	26.11.2011
 
-Tiedostot:
+Source files:
 README
 Bookself.java
 Tietokanta.java
 bookself.sql
+AddBookWindow.java
+AddWriter.java
+MainWindow.java
 
 
 READY:

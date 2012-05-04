@@ -380,15 +380,15 @@ public class Tietokanta {
 			int i=0;
 			stmt = con.createStatement();
 			sql = "SELECT Bookshelf.WRITER.FNAME, "
-					+ "Bookshelf.WRITER.LNAME FROM Bookshelf.WRITER ";
-
+					+ "Bookshelf.WRITER.LNAME FROM Bookshelf.WRITER ORDER BY Bookshelf.WRITER.LNAME ASC";
+			
 			rs = stmt.executeQuery(sql);
 			System.out.println(sql);
 			while (rs.next()) {
 				String enimi = rs.getString("FNAME");
 				String snimi = rs.getString("LNAME");
 
-				data[i]= (enimi + "  " + snimi);
+				data[i]= (i+" "+enimi + "  " + snimi);
 				System.out.println(i+". "+ enimi + " " + snimi);
 				i++;
 			}

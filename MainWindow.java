@@ -1,5 +1,7 @@
 import javax.swing.AbstractListModel;
 
+//import kirjasto.AddBookWindow;
+
 public class MainWindow {
 	/*
 	 * public static void main(String[] args) { Naytto toosa = new Naytto();
@@ -21,8 +23,9 @@ public class MainWindow {
  */
 class Naytto extends javax.swing.JFrame {
 	public AddWriterWindow lisays;
+	public AddBookWindow bookAdd;
 	private Bookshelf kirjahylly;
-	private ListaMalli listaMalli;
+	public ListaMalli listaMalli;
 
 	/**
 	 * Creates new form Naytto
@@ -30,10 +33,15 @@ class Naytto extends javax.swing.JFrame {
 	public Naytto(Bookshelf kirjahylly) {
 		System.out.println("DEBUG: Naytto constructor(v07)");
 		this.kirjahylly = kirjahylly;
-		this.listaMalli=new ListaMalli();
+		this.listaMalli = new ListaMalli(kirjahylly);
 		// this.kirjahylly = new Bookshelf("Bookshelf", "librarian",
 		// "salasana");
+		// Adding new writer window
 		lisays = new AddWriterWindow(kirjahylly);
+
+		// Adding new Book
+		bookAdd = new AddBookWindow(kirjahylly, listaMalli);
+
 		initComponents();
 
 	}
@@ -52,6 +60,7 @@ class Naytto extends javax.swing.JFrame {
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jList1 = new javax.swing.JList();
 		updateWritersJButton = new javax.swing.JButton();
+		addBookjButton = new javax.swing.JButton();
 		menuBar = new javax.swing.JMenuBar();
 		fileMenu = new javax.swing.JMenu();
 		openMenuItem = new javax.swing.JMenuItem();
@@ -88,6 +97,13 @@ class Naytto extends javax.swing.JFrame {
 						updateWritersJButtonActionPerformed(evt);
 					}
 				});
+
+		addBookjButton.setText("Add Book");
+		addBookjButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				addBookjButtonActionPerformed(evt);
+			}
+		});
 
 		fileMenu.setMnemonic('f');
 		fileMenu.setText("File");
@@ -163,22 +179,33 @@ class Naytto extends javax.swing.JFrame {
 								.addGroup(
 										layout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(jButton1)
+												.addGroup(
+														layout.createSequentialGroup()
+																.addComponent(
+																		jButton1)
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																.addComponent(
+																		addBookjButton))
 												.addComponent(jLabel1)
+												.addComponent(
+														updateWritersJButton)
 												.addComponent(
 														jScrollPane1,
 														javax.swing.GroupLayout.PREFERRED_SIZE,
-														136,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(
-														updateWritersJButton))
-								.addContainerGap(252, Short.MAX_VALUE)));
+														184,
+														javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addContainerGap(202, Short.MAX_VALUE)));
 		layout.setVerticalGroup(layout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup()
 								.addContainerGap()
-								.addComponent(jButton1)
+								.addGroup(
+										layout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.BASELINE)
+												.addComponent(jButton1)
+												.addComponent(addBookjButton))
 								.addGap(18, 18, 18)
 								.addComponent(jLabel1)
 								.addPreferredGap(
@@ -213,6 +240,12 @@ class Naytto extends javax.swing.JFrame {
 		jList1.updateUI();
 		System.out.println("Debug: updateWritersJButton pressed");
 	}// GEN-LAST:event_updateWritersJButtonActionPerformed
+
+	private void addBookjButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_addBookjButtonActionPerformed
+		System.out.println("Debug: bookAdd Window started");
+		bookAdd.setVisible(true);
+		// TODO add your handling code here:
+	}// GEN-LAST:event_addBookjButtonActionPerformed
 
 	/**
 	 * @param args
@@ -259,6 +292,7 @@ class Naytto extends javax.swing.JFrame {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 
 			public void run() {
+				// this.se
 				// new Naytto().setVisible(true);
 			}
 		});
@@ -266,6 +300,7 @@ class Naytto extends javax.swing.JFrame {
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JMenuItem aboutMenuItem;
+	private javax.swing.JButton addBookjButton;
 	private javax.swing.JMenuItem contentsMenuItem;
 	private javax.swing.JMenuItem copyMenuItem;
 	private javax.swing.JMenuItem cutMenuItem;
@@ -286,24 +321,27 @@ class Naytto extends javax.swing.JFrame {
 	private javax.swing.JButton updateWritersJButton;
 
 	// End of variables declaration//GEN-END:variables
-	private class ListaMalli extends AbstractListModel {
-		// new javax.swing.AbstractListModel() {
-		String[] strings;
-		public ListaMalli(){
-			strings = kirjahylly.getWriters();
-		}
+	
+}
+ class ListaMalli extends AbstractListModel {
+	 private Bookshelf kirjahylly;
+	// new javax.swing.AbstractListModel() {
+	String[] strings;
 
-		public int getSize() {
-			return strings.length;
-		}
+	public ListaMalli(Bookshelf kirjahylly) {
+		strings = kirjahylly.getWriters();
+	}
 
-		public Object getElementAt(int i) {
-			return strings[i];
-		}
+	public int getSize() {
+		return strings.length;
+	}
 
-		public void updateLista() {
-			strings = kirjahylly.getWriters();
+	public Object getElementAt(int i) {
+		return strings[i];
+	}
 
-		}
+	public void updateLista() {
+		strings = kirjahylly.getWriters();
+
 	}
 }

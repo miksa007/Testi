@@ -16,7 +16,7 @@ public class Bookshelf {
 	 * Scanner luokan kayttaanotto
 	 */
 	public static Scanner lukija = new Scanner(System.in);
-
+	private static Bookshelf kirjahylly;
 	/**
 	 * 
 	 * @param schema
@@ -27,6 +27,9 @@ public class Bookshelf {
 		try {
 			tk = new Tietokanta();
 			tk.createConnection(schema, user, pass);
+
+			Naytto toosa = new Naytto(kirjahylly);
+			toosa.setVisible(true);
 
 			// start configuration
 			// Should I remove these?
@@ -45,18 +48,19 @@ public class Bookshelf {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Bookshelf kirjahylly = new Bookshelf("Bookshelf", "librarian",
+		kirjahylly = new Bookshelf("Bookshelf", "librarian",
 				"salasana");
 		boolean lukitus = true;
 		//
-		Naytto toosa = new Naytto(kirjahylly);
-		toosa.setVisible(true);
+//		Naytto toosa = new Naytto(kirjahylly);
+//		toosa.setVisible(true);
 
 		// testaus
 
 		// testaus Loppui
 
 		try {
+			//NO consol UI anymore
 			int valinta = 0;// meneeko silmukkaan??
 			while (valinta != 0) {
 				System.out.println("**Bookshelf**");
