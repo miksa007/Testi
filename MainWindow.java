@@ -26,14 +26,18 @@ class Naytto extends javax.swing.JFrame {
 	public AddBookWindow bookAdd;
 	private Bookshelf kirjahylly;
 	public ListaMalli listaMalli;
-
+	public BooksListaMalli bookListaMalli;
 	/**
 	 * Creates new form Naytto
 	 */
 	public Naytto(Bookshelf kirjahylly) {
-		System.out.println("DEBUG: Naytto constructor(v07)");
+		System.out.println("DEBUG: Naytto constructor(v08)");
 		this.kirjahylly = kirjahylly;
+		//writers datastructure
 		this.listaMalli = new ListaMalli(kirjahylly);
+		//Books datastructure
+		this.bookListaMalli = new BooksListaMalli(kirjahylly);
+		
 		// this.kirjahylly = new Bookshelf("Bookshelf", "librarian",
 		// "salasana");
 		// Adding new writer window
@@ -342,6 +346,28 @@ class Naytto extends javax.swing.JFrame {
 
 	public void updateLista() {
 		strings = kirjahylly.getWriters();
+
+	}
+}
+ class BooksListaMalli extends AbstractListModel {
+	 private Bookshelf kirjahylly;
+	// new javax.swing.AbstractListModel() {
+	String[] strings;
+
+	public BooksListaMalli(Bookshelf kirjahylly) {
+		strings = kirjahylly.getBooks();
+	}
+
+	public int getSize() {
+		return strings.length;
+	}
+
+	public Object getElementAt(int i) {
+		return strings[i];
+	}
+
+	public void updateLista() {
+		strings = kirjahylly.getBooks();
 
 	}
 }

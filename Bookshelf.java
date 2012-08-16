@@ -221,7 +221,16 @@ public class Bookshelf {
 		return null;
 
 	}
+	public static String[] getBooks() {
+		try {
+			return tk.getBooks();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Bookshelf.getBooks:error");
+		}
+		return null;
 
+	}
 	public static void suljeYhteys() {
 		System.out.println("");
 		tk.suljeYhteys();

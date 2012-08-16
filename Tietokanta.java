@@ -405,6 +405,64 @@ public class Tietokanta {
 
 		return data;
 	}
+	/**
+	 * gets all books fron database and returns String array
+	 * @return Books (String[])
+	 * @throws Exception
+	 */
+	public String[] getBooks() throws Exception {
+		int count=0;
+		//Haetaan rivien lukumaara
+		String sql = "SELECT COUNT(*) AS rowcount FROM Bookshelf.BOOKS";
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			rs.next();
+			count = rs.getInt("rowcount") ;
+			System.out.println("DEBUG BOOKS rowcount:"+count);
+			rs.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+			System.out.println("Error getBooks(): getting BOOKS rowcount ");
+		}
+		
+		String data[]=new String[count];
+		// Kysely kantaan
+
+		stmt = null;
+		rs = null;
+		try {
+			int i=0;
+			stmt = con.createStatement();
+			sql = "SELECT Bookshelf.BOOKS.NAME "
+					+ " FROM Bookshelf.BOOKS ORDER BY Bookshelf.BOOKS.NAME ASC";
+			System.out.println(sql);
+			rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) {
+				String nimi = rs.getString("NAME");
+				//String snimi = rs.getString("LNAME");
+
+				data[i]= (i+" "+nimi );
+				System.out.println(i+". "+ nimi);
+				i++;
+			}
+			rs.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+			System.out.println("Error getBooks(): getting books");
+
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
+		}
+
+		return data;
+	}
+	
 
 	/**
 	 * Voidaan muuttaa taulujen arvoja

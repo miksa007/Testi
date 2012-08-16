@@ -1,7 +1,13 @@
 github test Project
+version 0.73 	15.8.2012
+	Target: User could list all books by pressing "List Books"-button
+		(Mainwindow -> Bookshelf -> tietokanta)
+		- Tietokanta.getBooks() gets all books(and writers(- option)) from database and returns String[] array
+		-Bookshelf.getBooks()
+		- BookListaMalli Object
 version 0.72	4.5.2012
 	NEW SOURCE: AddBookWindow.java
-	    User can add books to database	    	  
+	    User can add books to the database	    	  
 	minory changes Tietokanta.java:
 	       getWriters returns writers in ascending order
 	minory changes MainWindow.java
