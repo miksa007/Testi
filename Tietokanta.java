@@ -150,7 +150,7 @@ public class Tietokanta {
 		PreparedStatement addbook = null;
 		try {
 			addbook = con
-					.prepareStatement("INSERT INTO BOOKS (NAME, ISBN1, FIELD1, FIELD2, YEAR, PURCHASEPRICE, WNO) VALUES (?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO BOOKS (NAME, ISBN1, FIELD1, FIELD2, YEAR, PURCHASEPRICE, SELLPRICE, WNO) VALUES (?,?,?,?,?,?,?,?)");
 
 			addbook.setString(1, nimi);
 			addbook.setString(2, isbn1);
@@ -158,7 +158,8 @@ public class Tietokanta {
 			addbook.setString(4, " ");
 			addbook.setInt(5, year);
 			addbook.setFloat(6, price);
-			addbook.setInt(7, wno);
+			addbook.setFloat(7, price);
+			addbook.setInt(8, wno);
 
 			addbook.executeUpdate();
 		} catch (SQLException se) {
@@ -380,16 +381,18 @@ public class Tietokanta {
 			int i=0;
 			stmt = con.createStatement();
 			sql = "SELECT Bookshelf.WRITER.FNAME, "
-					+ "Bookshelf.WRITER.LNAME FROM Bookshelf.WRITER ORDER BY Bookshelf.WRITER.LNAME ASC";
+					+ "Bookshelf.WRITER.LNAME," +
+					"Bookshelf.WRITER.WNO FROM Bookshelf.WRITER ORDER BY Bookshelf.WRITER.LNAME ASC";
 			
 			rs = stmt.executeQuery(sql);
 			System.out.println(sql);
 			while (rs.next()) {
+				int wno=rs.getInt("WNO");
 				String enimi = rs.getString("FNAME");
 				String snimi = rs.getString("LNAME");
 
-				data[i]= (i+" "+enimi + "  " + snimi);
-				System.out.println(i+". "+ enimi + " " + snimi);
+				data[i]= (wno+" "+enimi + "  " + snimi);
+				System.out.println(i+". (WNO="+wno+") "+ enimi + " " + snimi);
 				i++;
 			}
 			rs.close();

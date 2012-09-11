@@ -1,4 +1,10 @@
 github test Project
+
+HOWTO TEST
+	Bookshelf has the main method
+	Application use MySQL database.(mysql-connector-java... need)
+
+version 0.74 	7.9.2012
 version 0.73 	15.8.2012
 	Target: User could list all books by pressing "List Books"-button
 		(Mainwindow -> Bookshelf -> tietokanta)
@@ -58,6 +64,7 @@ change()
 
 GUI for all
 
+Should I do The Class diagram?
 
 Other::
 MySQL tables Version 0.4:
@@ -83,3 +90,6 @@ CREATE TABLE WRITER (
 	FIELD2 VARCHAR(40), 
 	IFIELD INTEGER)
 
+Bug Report:
+	SELPRICE problem solved(0.74)
+	WNO (writer number) problem solved (0.74)

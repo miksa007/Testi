@@ -90,7 +90,6 @@ public class Bookshelf {
 
 					String nimi;
 
-					int ano;
 					System.out.println("Anna kirjan nimi! ");
 					nimi = lukija.nextLine();
 					System.out.println("Anna hinta! ");
