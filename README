@@ -4,6 +4,9 @@ HOWTO TEST
 	Bookshelf has the main method
 	Application use MySQL database.(mysql-connector-java... need)
 
+version 0.75 	11.9.2012
+	Created new updated GUI with netbeans. Ridiculous to use netbeans for GUI's and Eclipse for everything else.
+	Booklist is included to main screen.
 version 0.74 	7.9.2012
 version 0.73 	15.8.2012
 	Target: User could list all books by pressing "List Books"-button
