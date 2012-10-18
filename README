@@ -4,6 +4,8 @@ HOWTO TEST
 	Bookshelf has the main method
 	Application use MySQL database.(mysql-connector-java... need)
 
+version 0.76	18.10.2012
+	Automated booklist refresh
 version 0.75 	11.9.2012
 	Created new updated GUI with netbeans. Ridiculous to use netbeans for GUI's and Eclipse for everything else.
 	Booklist is included to main screen.

@@ -157,6 +157,8 @@ class Naytto extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         listaMalli.updateLista();
 		jList1.updateUI();
+		bookListaMalli.updateLista();
+		jList2.updateUI();
 		System.out.println("Debug: updateJButton pressed");
     }//GEN-LAST:event_jButton3ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
