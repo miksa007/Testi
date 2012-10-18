@@ -4,26 +4,21 @@
  *
  * @author miksa
  */
-public class ModifyWriter extends javax.swing.JFrame {
+public class ModifyBook extends javax.swing.JFrame {
 	private Bookshelf kirjahylly;
     /**
      * Creates new form ModifyWriter
      */
-    public ModifyWriter(Bookshelf kirjahylly) {
+    public ModifyBook(Bookshelf kirjahylly) {
     	this.kirjahylly = kirjahylly;
         initComponents();
     }
-/**
- * date 18.10.2012
- * 
- * @param wno
- * @param fName
- * @param lName
- */
-    public void updateVariables(String wno, String fName, String lName){
-        wnoJTextField.setText(wno);
-        fNameJTextField.setText(fName);
-        lNameJTextField.setText(lName);
+
+    public void updateVariables(String bno, String name, String oName, String wno){
+        bnoJTextField.setText(bno);
+        nameJTextField.setText(name);
+        oNameJTextField.setText(oName);
+        wnoJTextField1.setText(wno);
         this.setVisible(true);
     }
     /**
@@ -35,39 +30,41 @@ public class ModifyWriter extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        updateJButton = new javax.swing.JButton();
+        cancelJButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        wnoJTextField = new javax.swing.JTextField();
-        fNameJTextField = new javax.swing.JTextField();
-        lNameJTextField = new javax.swing.JTextField();
+        bnoJTextField = new javax.swing.JTextField();
+        nameJTextField = new javax.swing.JTextField();
+        oNameJTextField = new javax.swing.JTextField();
         deleteJButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        wnoJTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Update");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        updateJButton.setText("Update");
+        updateJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                updateJButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancelJButton.setText("Cancel");
+        cancelJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cancelJButtonActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Writer number");
+        jLabel1.setText("Book number");
 
-        jLabel2.setText("First name");
+        jLabel2.setText("Name");
 
-        jLabel3.setText("Last name");
+        jLabel3.setText("Original name");
 
-        wnoJTextField.setText("0");
+        bnoJTextField.setText("0");
 
         deleteJButton.setText("Delete");
         deleteJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +72,10 @@ public class ModifyWriter extends javax.swing.JFrame {
                 deleteJButtonActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Writer number");
+
+        wnoJTextField1.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,21 +85,23 @@ public class ModifyWriter extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(updateJButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(cancelJButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteJButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(wnoJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(wnoJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bnoJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(oNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,19 +110,23 @@ public class ModifyWriter extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(wnoJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bnoJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(fNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(lNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                    .addComponent(oNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(jLabel4)
+                    .addComponent(wnoJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updateJButton)
+                    .addComponent(cancelJButton)
                     .addComponent(deleteJButton))
                 .addGap(21, 21, 21))
         );
@@ -127,24 +134,25 @@ public class ModifyWriter extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void updateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateJButtonActionPerformed
     	System.out.println("Debug: Add");
-    	int wno =Integer.parseInt(wnoJTextField.getText());
-		String ename = fNameJTextField.getText();
-		String sname = lNameJTextField.getText();
-		kirjahylly.updateWriter(wno, ename, sname);
+    	int bno =Integer.parseInt(bnoJTextField.getText());
+		String ename = nameJTextField.getText();
+		String sname = oNameJTextField.getText();
+		int wno=Integer.parseInt(wnoJTextField1.getText());
+		kirjahylly.updateBook(bno, ename, sname, wno);
 		
     	this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_updateJButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cancelJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelJButtonActionPerformed
        System.out.println("Debug: Cancel");
 		this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cancelJButtonActionPerformed
 
     private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed
-    	int wno =Integer.parseInt(wnoJTextField.getText());
-    	kirjahylly.deleteWriter(wno);
+    	int wno =Integer.parseInt(bnoJTextField.getText());
+    	kirjahylly.deleteBook(wno);
     	System.out.println("Debug: Delete");
     	this.setVisible(false);
     }//GEN-LAST:event_deleteJButtonActionPerformed
@@ -184,14 +192,16 @@ public class ModifyWriter extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField bnoJTextField;
+    private javax.swing.JButton cancelJButton;
     private javax.swing.JButton deleteJButton;
-    private javax.swing.JTextField fNameJTextField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField lNameJTextField;
-    private javax.swing.JTextField wnoJTextField;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField nameJTextField;
+    private javax.swing.JTextField oNameJTextField;
+    private javax.swing.JButton updateJButton;
+    private javax.swing.JTextField wnoJTextField1;
     // End of variables declaration//GEN-END:variables
 }

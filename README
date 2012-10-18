@@ -3,9 +3,12 @@ github test Project
 HOWTO TEST
 	Bookshelf has the main method
 	Application use MySQL database.(mysql-connector-java... need)
-
-version 0.76	18.10.2012
-	List selection operation added
+	
+version 0.78	18.10.2012
+	BookList selection operation added
+	User can double-click item in the book list. The double-clicking opens modify book window with information of the selected item.
+version 0.77	18.10.2012
+	WriterList selection operation added
 	User can double-click item in the Writer list. The double-clicking opens modify writer window with information of the selected item.
 version 0.76	18.10.2012
 	Automated booklist refresh

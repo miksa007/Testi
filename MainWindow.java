@@ -20,6 +20,7 @@ class Naytto extends javax.swing.JFrame {
 	public AddWriterWindow lisays;
 	public AddBookWindow bookAdd;
 	public ModifyWriter modifyWriter;
+	public ModifyBook modifyBook;
 	private Bookshelf kirjahylly;
 	public ListaMalli listaMalli;
 	public BooksListaMalli bookListaMalli;
@@ -45,6 +46,8 @@ class Naytto extends javax.swing.JFrame {
 
 		//Modifying writer data
 		modifyWriter = new ModifyWriter(kirjahylly);
+		modifyBook = new ModifyBook(kirjahylly);
+		
 		initComponents();
 		// let's override init code
 		jList1.setModel(listaMalli);
@@ -120,6 +123,11 @@ class Naytto extends javax.swing.JFrame {
 
 			public Object getElementAt(int i) {
 				return strings[i];
+			}
+		});
+		jList2.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				jList2ActionPerformed(evt);
 			}
 		});
 		jScrollPane2.setViewportView(jList2);
@@ -247,6 +255,34 @@ class Naytto extends javax.swing.JFrame {
 			String fName=st2.nextToken();
 			String lName = st2.nextToken();
 			modifyWriter.updateVariables(wnoString, fName, lName);
+
+		} else if (evt.getClickCount() == 3) {
+			System.out
+					.println("Debug:jList1ActionPerformed(MouseEvent evt) three clicks");
+		}
+	}
+	private void jList2ActionPerformed(MouseEvent evt) {
+		System.out.println("Debug:jList2ActionPerformed(MouseEvent evt)");
+		if (evt.getClickCount() == 2) {
+			System.out
+					.println("Debug:jList2ActionPerformed(MouseEvent evt) two clicks");
+			int index = jList2.locationToIndex(evt.getPoint());
+			String data = bookListaMalli.getElementAt(index).toString();
+
+			System.out.println("Debug: index = " + index + ", data = " + data);
+			StringTokenizer st = new StringTokenizer(data);
+			int bno = Integer.parseInt(st.nextToken());
+
+			String bookdata = kirjahylly.getBook(bno);
+			System.out.println("Debug: BNO=" + bno + "\n" + bookdata);
+			StringTokenizer st2 = new StringTokenizer(bookdata,"\n");
+			String bnoString=st2.nextToken();
+			bno=Integer.parseInt(bnoString);
+			String name=st2.nextToken();
+			String oName = st2.nextToken();
+			String wnoString=st2.nextToken();
+			int wno=Integer.parseInt(wnoString);
+			modifyBook.updateVariables(wnoString, name, oName, bnoString);
 
 		} else if (evt.getClickCount() == 3) {
 			System.out

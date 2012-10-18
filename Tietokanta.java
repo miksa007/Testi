@@ -235,6 +235,44 @@ public class Tietokanta {
 	 * 
 	 * date 18.10.2012
 	 * 
+	 * @param bno
+	 * @return
+	 * @throws Exception
+	 */
+	public String findBook(int bno) throws Exception {
+		String arvo = null;
+		String sql;
+		ResultSet rs = null;
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			// SQL Lause parametreilla varustettuna
+			sql = "SELECT * FROM BOOKS WHERE BNO='" + bno + "'";
+			rs = stmt.executeQuery(sql);
+			// silmukka palautta vai yhden tai ei mitaan
+			while (rs.next()) {
+				int id = rs.getInt("BNO");
+				String nimi = rs.getString("NAME");
+				String onimi = rs.getString("ORIGNAME");
+				int wno = rs.getInt("WNO");
+				arvo = (id + "\n" + nimi + "\n" + onimi+"\n"+wno);
+			}
+			rs.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw new Exception(
+					"Error findBook: Data search error");
+		} finally {
+			if (stmt != null)
+				stmt.close();
+		}
+		System.out.println("Debug findBook: " + arvo);
+		return arvo;
+	}
+	/**
+	 * 
+	 * date 18.10.2012
+	 * 
 	 * @param wno
 	 * @return
 	 * @throws Exception
@@ -263,6 +301,35 @@ public class Tietokanta {
 	 * date 18.10.2012
 	 * 
 	 * @param wno
+	 * @param fName
+	 * @param lName
+	 * @param bno
+	 * @throws Exception
+	 */
+	public void updateBook(int wno, String name, String oName,int bno) throws Exception {
+		String sql;
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			sql = "UPDATE BOOKS SET NAME='"+name+"',ORIGNAME='"+oName+"',WNO='"+wno+"' WHERE BNO='" + bno + "'";
+			stmt.executeUpdate(sql);
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw new Exception(
+					"Error updateBook: Data  error");
+		} finally {
+			if (stmt != null)
+				stmt.close();
+		}
+		System.out.println("Debug updateBook: ");
+		
+	}
+	/**
+	 * 
+	 * date 18.10.2012
+	 * 
+	 * @param wno
 	 * @throws Exception
 	 */
 	public void deleteWriter(int wno) throws Exception {
@@ -284,6 +351,33 @@ public class Tietokanta {
 		System.out.println("Debug deleteWriter: ");
 		
 	}
+	/**
+	 * 
+	 * date 18.10.2012
+	 * 
+	 * @param bno
+	 * @throws Exception
+	 */
+	public void deleteBook(int bno) throws Exception {
+		String sql;
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			sql = "DELETE FROM BOOKS WHERE BNO='" + bno + "'";
+			stmt.executeUpdate(sql);
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw new Exception(
+					"Error deleteBook: Data  error");
+		} finally {
+			if (stmt != null)
+				stmt.close();
+		}
+		System.out.println("Debug deleteBook: ");
+		
+	}
+	
 	/**
 	 * LisaaTietoa metodia kaytetaan testaukseen. Tassa paaasiassa lisaillaan
 	 * vain erilaisiin tauluihin satunnaista tietoa
@@ -496,17 +590,19 @@ public class Tietokanta {
 		try {
 			int i=0;
 			stmt = con.createStatement();
-			sql = "SELECT Bookshelf.BOOKS.NAME "
+			sql = "SELECT Bookshelf.BOOKS.NAME, Bookshelf.BOOKS.BNO "
 					+ " FROM Bookshelf.BOOKS ORDER BY Bookshelf.BOOKS.NAME ASC";
 			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
 			
 			while (rs.next()) {
+				int bno=rs.getInt("BNO");
 				String nimi = rs.getString("NAME");
+				
 				//String snimi = rs.getString("LNAME");
 
-				data[i]= (i+" "+nimi );
-				System.out.println(i+". "+ nimi);
+				data[i]= (bno+" "+nimi );
+				System.out.println(bno+". "+ nimi);
 				i++;
 			}
 			rs.close();

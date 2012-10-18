@@ -223,9 +223,28 @@ public class Bookshelf {
 			tk.updateWriter(wno, ename, sname);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("addWriter:virhe");
+			System.out.println("updateWriter:virhe");
 		}
 	}
+	/**
+	 * 
+	 * date 18.10.2012
+	 * 
+	 * @param wno
+	 * @param ename
+	 * @param sname
+	 * @param bno
+	 */
+	public static void updateBook(int wno, String name, String oname, int bno) {
+		try {
+
+			tk.updateBook(wno, name, oname, bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("updateBook:virhe");
+		}
+	}
+
 	/**
 	 * This method get only one writer from database
 	 * 
@@ -243,6 +262,15 @@ public class Bookshelf {
 		}
 		return null;
 	}
+	public static String getBook(int bno) {
+		try {
+			return tk.findBook(bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("findBook:virhe");
+		}
+		return null;
+	}
 /**
  * 
  * date 18.10.2012
@@ -252,6 +280,20 @@ public class Bookshelf {
 	public static void deleteWriter(int wno) {
 		try {
 			tk.deleteWriter(wno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("deleteWriter:virhe");
+		}
+	}
+	/**
+	 * 
+	 * date 18.10.2012
+	 * 
+	 * @param bno
+	 */
+	public static void deleteBook(int bno) {
+		try {
+			tk.deleteBook(bno);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("deleteWriter:virhe");
