@@ -5,6 +5,9 @@ HOWTO TEST
 	Application use MySQL database.(mysql-connector-java... need)
 
 version 0.76	18.10.2012
+	List selection operation added
+	User can double-click item in the Writer list. The double-clicking opens modify writer window with information of the selected item.
+version 0.76	18.10.2012
 	Automated booklist refresh
 version 0.75 	11.9.2012
 	Created new updated GUI with netbeans. Ridiculous to use netbeans for GUI's and Eclipse for everything else.

@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**********************************************
  * 
- * 25.11.2011
+ * started 25.11.2011
  * 
  * @author miksa
  * 
@@ -130,7 +130,7 @@ public class Bookshelf {
 					System.out.println("Anna asiakas numero!");
 					int asno = lukija.nextInt();
 					lukija.nextLine();
-					System.out.println(tk.etsiAsiakasNumero(asno));
+					//System.out.println(tk.etsiAsiakasNumero(asno));
 					break;
 				case 4:
 					System.out
@@ -209,7 +209,54 @@ public class Bookshelf {
 			System.out.println("addWriter:virhe");
 		}
 	}
+	/**
+	 * 
+	 * date 18.10.2012
+	 * 
+	 * @param wno
+	 * @param ename
+	 * @param sname
+	 */
+	public static void updateWriter(int wno, String ename, String sname) {
+		try {
 
+			tk.updateWriter(wno, ename, sname);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("addWriter:virhe");
+		}
+	}
+	/**
+	 * This method get only one writer from database
+	 * 
+	 * date 18.10.2012
+	 * 
+	 * @param wno Writers number
+	 * @return record of database with wno
+	 */
+	public static String getWriter(int wno) {
+		try {
+			return tk.findWriter(wno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("findWriter:virhe");
+		}
+		return null;
+	}
+/**
+ * 
+ * date 18.10.2012
+ * 
+ * @param wno
+ */
+	public static void deleteWriter(int wno) {
+		try {
+			tk.deleteWriter(wno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("deleteWriter:virhe");
+		}
+	}
 	public static String[] getWriters() {
 		try {
 			return tk.getWriters();

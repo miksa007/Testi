@@ -194,8 +194,15 @@ public class Tietokanta {
 				addwriter.close();
 		}
 	}
-
-	public String etsiAsiakasNumero(int ano) throws Exception {
+/**
+ * 
+ * date18.10.2012
+ * 
+ * @param wno
+ * @return
+ * @throws Exception
+ */
+	public String findWriter(int wno) throws Exception {
 		String arvo = null;
 		String sql;
 		ResultSet rs = null;
@@ -203,30 +210,80 @@ public class Tietokanta {
 		try {
 			stmt = con.createStatement();
 			// SQL Lause parametreilla varustettuna
-			sql = "SELECT * FROM ASIAKKAAT WHERE ANO='" + ano + "'";
+			sql = "SELECT * FROM WRITER WHERE WNO='" + wno + "'";
 			rs = stmt.executeQuery(sql);
 			// silmukka palautta vai yhden tai ei mitaan
 			while (rs.next()) {
-				int id = rs.getInt("ANO");
-				String enimi = rs.getString("ENIMI");
-				String snimi = rs.getString("SNIMI");
-
-				arvo = (id + " " + enimi + " " + snimi);
-
+				int id = rs.getInt("WNO");
+				String enimi = rs.getString("FNAME");
+				String snimi = rs.getString("LNAME");
+				arvo = (id + "\n" + enimi + "\n" + snimi);
 			}
 			rs.close();
-
 		} catch (SQLException se) {
 			se.printStackTrace();
 			throw new Exception(
-					"Tiedon etsiminen Asiakas Taulusta epaonnistui .");
+					"Error findWriter: Data search error");
 		} finally {
 			if (stmt != null)
 				stmt.close();
 		}
+		System.out.println("Debug findWriter: " + arvo);
 		return arvo;
 	}
-
+	/**
+	 * 
+	 * date 18.10.2012
+	 * 
+	 * @param wno
+	 * @return
+	 * @throws Exception
+	 */
+	public void updateWriter(int wno, String fName, String lName) throws Exception {
+		String sql;
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			sql = "UPDATE WRITER SET FNAME='"+fName+"',LNAME='"+lName+"' WHERE WNO='" + wno + "'";
+			stmt.executeUpdate(sql);
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw new Exception(
+					"Error updateWriter: Data  error");
+		} finally {
+			if (stmt != null)
+				stmt.close();
+		}
+		System.out.println("Debug updateWriter: ");
+		
+	}
+	/**
+	 * 
+	 * date 18.10.2012
+	 * 
+	 * @param wno
+	 * @throws Exception
+	 */
+	public void deleteWriter(int wno) throws Exception {
+		String sql;
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			sql = "DELETE FROM WRITER WHERE WNO='" + wno + "'";
+			stmt.executeUpdate(sql);
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+			throw new Exception(
+					"Error deleteWriter: Data  error");
+		} finally {
+			if (stmt != null)
+				stmt.close();
+		}
+		System.out.println("Debug deleteWriter: ");
+		
+	}
 	/**
 	 * LisaaTietoa metodia kaytetaan testaukseen. Tassa paaasiassa lisaillaan
 	 * vain erilaisiin tauluihin satunnaista tietoa
