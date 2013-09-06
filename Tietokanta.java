@@ -29,7 +29,10 @@ public class Tietokanta {
 	public void createConnection(String schema, String user, String pass)
 			throws Exception {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			//this use mysql
+			//Class.forName("com.mysql.jdbc.Driver").newInstance();
+			//this is for MariaDB
+			Class.forName("org.mariadb.jdbc.Driver").newInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(
