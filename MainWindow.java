@@ -1,12 +1,20 @@
 //package javaapplication1;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.StringTokenizer;
 
+
+
+
+
 //import BooksListaMalli;
 //import ListaMalli;
 import javax.swing.AbstractListModel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  * 
@@ -66,7 +74,24 @@ class Naytto extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed"
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
-
+		//Menubarin rakentaminen
+		JMenuBar menuBar;
+		JMenu menu, subMenu;
+		JMenuItem menuItem;
+		
+		menuBar = new JMenuBar();
+		menu = new JMenu("menueee");
+		menuBar.add(menu);
+		
+		 
+		menuItem=new JMenuItem("teksti menu item", KeyEvent.VK_T);
+		menu.add(menuItem);
+		setJMenuBar(menuBar);
+		
+		//TODO toiminta uupuu...
+		//menubar loppuu
+		
+		
 		jButton1 = new javax.swing.JButton();
 		jButton2 = new javax.swing.JButton();
 		jScrollPane1 = new javax.swing.JScrollPane();
