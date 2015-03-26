@@ -18,10 +18,11 @@ public class Bookshelf {
 	public static Scanner lukija = new Scanner(System.in);
 	private static Bookshelf kirjahylly;
 	/**
+	 * This constructor creates View, Databaseconnector and somethin else
 	 * 
-	 * @param schema
-	 * @param user
-	 * @param pass
+	 * @param schema Schemas name
+	 * @param user	User of Database
+	 * @param pass	Password of user to database
 	 */
 	public Bookshelf(String schema, String user, String pass) {
 		try {
@@ -51,14 +52,7 @@ public class Bookshelf {
 		kirjahylly = new Bookshelf("Bookshelf", "librarian",
 				"salasana");
 		boolean lukitus = true;
-		//
-//		Naytto toosa = new Naytto(kirjahylly);
-//		toosa.setVisible(true);
-
-		// testaus
-
-		// testaus Loppui
-
+		
 		try {
 			//NO consol UI anymore
 			int valinta = 0;// meneeko silmukkaan??
