@@ -4,6 +4,12 @@ import java.util.Scanner;
  * 
  * started 25.11.2011
  * 
+ * TODO	Paivitykset automaattisiksi
+ * TODO Kirjailijasta olio(ehka)
+ * TODO Myydyt kirjat luettelo ja ehkapa naytto
+ * TODO	Kirjan valinta nayttaa tiedot kirjasta( omassa ruudussa tai paneelin osassa)
+ * TODO Kirjailijan valinta nayttaa tiedot jossain
+ * 
  * @author miksa
  * 
  */
@@ -49,6 +55,7 @@ public class Bookshelf {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println("Alkaa...");
 		kirjahylly = new Bookshelf("Bookshelf", "librarian",
 				"salasana");
 		boolean lukitus = true;
