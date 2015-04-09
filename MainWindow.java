@@ -1,13 +1,11 @@
 //package javaapplication1;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.StringTokenizer;
-
-
-
-
 
 //import BooksListaMalli;
 //import ListaMalli;
@@ -24,6 +22,12 @@ public class MainWindow {
 
 }
 
+/**
+ * Constructs main View
+ * 
+ * @author miksa
+ *
+ */
 class Naytto extends javax.swing.JFrame {
 	public AddWriterWindow lisays;
 	public AddBookWindow bookAdd;
@@ -52,10 +56,10 @@ class Naytto extends javax.swing.JFrame {
 		// Adding new Book
 		bookAdd = new AddBookWindow(kirjahylly, listaMalli);
 
-		//Modifying writer data
+		// Modifying writer data
 		modifyWriter = new ModifyWriter(kirjahylly);
 		modifyBook = new ModifyBook(kirjahylly);
-		
+
 		initComponents();
 		// let's override init code
 		jList1.setModel(listaMalli);
@@ -74,24 +78,36 @@ class Naytto extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed"
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
-		//Menubarin rakentaminen
+		// Menubarin rakentaminen
 		JMenuBar menuBar;
 		JMenu menu, subMenu;
+		JMenu helpMenu;
 		JMenuItem menuItem;
-		
+		JMenuItem aboutMenuItem;
+
 		menuBar = new JMenuBar();
 		menu = new JMenu("menueee");
+		helpMenu = new JMenu("Help");
+
 		menuBar.add(menu);
+		menuBar.add(helpMenu);
+
+		menuItem = new JMenuItem("teksti menu item", KeyEvent.VK_T);
+		aboutMenuItem = new JMenuItem("About Bookshelf", KeyEvent.VK_A);
 		
-		 
-		menuItem=new JMenuItem("teksti menu item", KeyEvent.VK_T);
+		aboutMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				aboutMenuItemActionPerformed(e);
+			}
+		});
 		menu.add(menuItem);
+		helpMenu.add(aboutMenuItem);
 		setJMenuBar(menuBar);
-		
-		//TODO toiminta uupuu...
-		//menubar loppuu
-		
-		
+
+		// TODO toiminta uupuu...
+		// menubar loppuu
+
 		jButton1 = new javax.swing.JButton();
 		jButton2 = new javax.swing.JButton();
 		jScrollPane1 = new javax.swing.JScrollPane();
@@ -252,6 +268,10 @@ class Naytto extends javax.swing.JFrame {
 		System.out.println("Debug: updateJButton pressed");
 	}// GEN-LAST:event_jButton3ActionPerformed
 
+	private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent aevt) {
+		System.out.println("aboutmenuitem pressed");
+	}
+
 	/**
 	 * Jlist click happens User can select one of the elements. Selection will
 	 * open the eddWriter window.
@@ -275,9 +295,9 @@ class Naytto extends javax.swing.JFrame {
 			String writerdata = kirjahylly.getWriter(wno);
 			System.out.println("Debug: WNO=" + wno + "\n" + writerdata);
 			StringTokenizer st2 = new StringTokenizer(writerdata);
-			String wnoString=st2.nextToken();
-			wno=Integer.parseInt(wnoString);
-			String fName=st2.nextToken();
+			String wnoString = st2.nextToken();
+			wno = Integer.parseInt(wnoString);
+			String fName = st2.nextToken();
 			String lName = st2.nextToken();
 			modifyWriter.updateVariables(wnoString, fName, lName);
 
@@ -286,6 +306,7 @@ class Naytto extends javax.swing.JFrame {
 					.println("Debug:jList1ActionPerformed(MouseEvent evt) three clicks");
 		}
 	}
+
 	private void jList2ActionPerformed(MouseEvent evt) {
 		System.out.println("Debug:jList2ActionPerformed(MouseEvent evt)");
 		if (evt.getClickCount() == 2) {
@@ -300,13 +321,13 @@ class Naytto extends javax.swing.JFrame {
 
 			String bookdata = kirjahylly.getBook(bno);
 			System.out.println("Debug: BNO=" + bno + "\n" + bookdata);
-			StringTokenizer st2 = new StringTokenizer(bookdata,"\n");
-			String bnoString=st2.nextToken();
-			bno=Integer.parseInt(bnoString);
-			String name=st2.nextToken();
+			StringTokenizer st2 = new StringTokenizer(bookdata, "\n");
+			String bnoString = st2.nextToken();
+			bno = Integer.parseInt(bnoString);
+			String name = st2.nextToken();
 			String oName = st2.nextToken();
-			String wnoString=st2.nextToken();
-			int wno=Integer.parseInt(wnoString);
+			String wnoString = st2.nextToken();
+			int wno = Integer.parseInt(wnoString);
 			modifyBook.updateVariables(wnoString, name, oName, bnoString);
 
 		} else if (evt.getClickCount() == 3) {

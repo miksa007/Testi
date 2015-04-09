@@ -4,11 +4,10 @@ import java.util.Scanner;
  * 
  * started 25.11.2011
  * 
+ * TODO about dialogi jai kesken
  * TODO	Paivitykset automaattisiksi
  * TODO Kirjailijasta olio(ehka)
  * TODO Myydyt kirjat luettelo ja ehkapa naytto
- * TODO	Kirjan valinta nayttaa tiedot kirjasta( omassa ruudussa tai paneelin osassa)
- * TODO Kirjailijan valinta nayttaa tiedot jossain
  * 
  * @author miksa
  * 
@@ -310,6 +309,11 @@ public class Bookshelf {
 		return null;
 
 	}
+	/**
+	 * This method return all books in one String array
+	 * 
+	 * @return String array of books
+	 */
 	public static String[] getBooks() {
 		try {
 			return tk.getBooks();
