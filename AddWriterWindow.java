@@ -34,8 +34,10 @@ public class AddWriterWindow extends javax.swing.JFrame {
 		jTextField1 = new javax.swing.JTextField();
 		jTextField2 = new javax.swing.JTextField();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+		//setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		//this.dispose();
+		
+		setLocation(600, 200);
 		jButton1.setText("Add");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +142,11 @@ public class AddWriterWindow extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>
 
+	/**
+	 * This happens when user press add button in add window
+	 * 
+	 * @param evt
+	 */
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 		System.out.println("Debug: Add");
 		String ename = jTextField1.getText();
@@ -147,9 +154,15 @@ public class AddWriterWindow extends javax.swing.JFrame {
 		kirjahylly.addWriter(ename, sname);
 		jTextField1.setText("");
 		jTextField2.setText("");
+		kirjahylly.updateLists();
 		this.setVisible(false);
 	}
 
+	/**
+	 * This happens when user press cancel button in add window.
+	 * 
+	 * @param evt
+	 */
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 		System.out.println("Debug: Cancel");
 		jTextField1.setText("");

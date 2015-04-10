@@ -13,6 +13,7 @@ import javax.swing.AbstractListModel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -94,7 +95,7 @@ class Naytto extends javax.swing.JFrame {
 
 		menuItem = new JMenuItem("teksti menu item", KeyEvent.VK_T);
 		aboutMenuItem = new JMenuItem("About Bookshelf", KeyEvent.VK_A);
-		
+
 		aboutMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -117,7 +118,7 @@ class Naytto extends javax.swing.JFrame {
 		jButton3 = new javax.swing.JButton();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+		setLocation(200, 200);
 		jButton1.setText("Add Writer");
 		jButton1.setActionCommand("addWriterJButton");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +250,18 @@ class Naytto extends javax.swing.JFrame {
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-
+	/**
+	 * 
+	 * This method click update button. AddWriterWindow and AddBookWindow calls this when they finish throught the Bookshelf class.
+	 * 
+	 * TODO This can't be the best way to do this update-operation.
+	 * 
+	 * @since 10.4.2015
+	 */
+	public void UpdateJButtonClick() {
+		System.out.println("update button automated click");
+		jButton3.doClick();
+	}
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		System.out.println("Debug");
 		lisays.setVisible(true);
@@ -260,6 +272,11 @@ class Naytto extends javax.swing.JFrame {
 		bookAdd.setVisible(true);
 	}// GEN-LAST:event_jButton2ActionPerformed
 
+	/**
+	 * This happens when user press update button in main window
+	 * 
+	 * @param evt
+	 */
 	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
 		listaMalli.updateLista();
 		jList1.updateUI();
@@ -268,13 +285,22 @@ class Naytto extends javax.swing.JFrame {
 		System.out.println("Debug: updateJButton pressed");
 	}// GEN-LAST:event_jButton3ActionPerformed
 
+	/**
+	 * ActionEvent happens if user press Help/about menuitem
+	 * 
+	 * @since 9.4.2015
+	 * @param aevt
+	 */
 	private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent aevt) {
 		System.out.println("aboutmenuitem pressed");
+		JOptionPane.showMessageDialog(this,
+				"Version "+kirjahylly.VERSIONNUMBER+"\n\nSomething to ask?\nSend email to miksa007@gmail.com",
+				"Miksan Kirjastosovellus", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	/**
 	 * Jlist click happens User can select one of the elements. Selection will
-	 * open the eddWriter window.
+	 * open the addWriter window.
 	 * 
 	 * date 18.10.2012
 	 * 

@@ -4,37 +4,48 @@ import java.util.Scanner;
  * 
  * started 25.11.2011
  * 
- * TODO about dialogi jai kesken
- * TODO	Paivitykset automaattisiksi
- * TODO Kirjailijasta olio(ehka)
+ * 
+ * 
+ * TODO Kirjailijasta olio(ehka)<BR>
  * TODO Myydyt kirjat luettelo ja ehkapa naytto
+ * TODO Lisataan addBookwindow -ikkunaan dropdown valikko mahdollisista kirjailijoista.
+ * TODO addBook ei voi onnistua jos kirjailijaa ei ole valittu (mahdollisuus valita corporation jos kirjailijaa ei ole)
+ * 
+ * 9.4.2015 about dialogi valmis.<BR>
+ * 10.4.2015 Paivitykset automaattisiksi.<BR>
  * 
  * @author miksa
  * 
  */
 public class Bookshelf {
+	public static final String VERSIONNUMBER="0.80"; 
 	/**
 	 * Tietokanta ilmentyma. Tietokanta maaritellaan main metodissa.
 	 */
 	private static Tietokanta tk;
+	private static Naytto toosa;
 	/**
 	 * Scanner luokan kayttaanotto
 	 */
 	public static Scanner lukija = new Scanner(System.in);
 	private static Bookshelf kirjahylly;
+
 	/**
 	 * This constructor creates View, Databaseconnector and somethin else
 	 * 
-	 * @param schema Schemas name
-	 * @param user	User of Database
-	 * @param pass	Password of user to database
+	 * @param schema
+	 *            Schemas name
+	 * @param user
+	 *            User of Database
+	 * @param pass
+	 *            Password of user to database
 	 */
 	public Bookshelf(String schema, String user, String pass) {
 		try {
 			tk = new Tietokanta();
 			tk.createConnection(schema, user, pass);
 
-			Naytto toosa = new Naytto(kirjahylly);
+			toosa = new Naytto(kirjahylly);
 			toosa.setVisible(true);
 
 			// start configuration
@@ -55,12 +66,11 @@ public class Bookshelf {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Alkaa...");
-		kirjahylly = new Bookshelf("Bookshelf", "librarian",
-				"salasana");
+		kirjahylly = new Bookshelf("Bookshelf", "librarian", "salasana");
 		boolean lukitus = true;
-		
+
 		try {
-			//NO consol UI anymore
+			// NO consol UI anymore
 			int valinta = 0;// meneeko silmukkaan??
 			while (valinta != 0) {
 				System.out.println("**Bookshelf**");
@@ -130,7 +140,7 @@ public class Bookshelf {
 					System.out.println("Anna asiakas numero!");
 					int asno = lukija.nextInt();
 					lukija.nextLine();
-					//System.out.println(tk.etsiAsiakasNumero(asno));
+					// System.out.println(tk.etsiAsiakasNumero(asno));
 					break;
 				case 4:
 					System.out
@@ -209,6 +219,7 @@ public class Bookshelf {
 			System.out.println("addWriter:virhe");
 		}
 	}
+
 	/**
 	 * 
 	 * date 18.10.2012
@@ -226,6 +237,7 @@ public class Bookshelf {
 			System.out.println("updateWriter:virhe");
 		}
 	}
+
 	/**
 	 * 
 	 * date 18.10.2012
@@ -250,7 +262,8 @@ public class Bookshelf {
 	 * 
 	 * date 18.10.2012
 	 * 
-	 * @param wno Writers number
+	 * @param wno
+	 *            Writers number
 	 * @return record of database with wno
 	 */
 	public static String getWriter(int wno) {
@@ -262,6 +275,7 @@ public class Bookshelf {
 		}
 		return null;
 	}
+
 	public static String getBook(int bno) {
 		try {
 			return tk.findBook(bno);
@@ -271,12 +285,13 @@ public class Bookshelf {
 		}
 		return null;
 	}
-/**
- * 
- * date 18.10.2012
- * 
- * @param wno
- */
+
+	/**
+	 * 
+	 * date 18.10.2012
+	 * 
+	 * @param wno
+	 */
 	public static void deleteWriter(int wno) {
 		try {
 			tk.deleteWriter(wno);
@@ -285,6 +300,7 @@ public class Bookshelf {
 			System.out.println("deleteWriter:virhe");
 		}
 	}
+
 	/**
 	 * 
 	 * date 18.10.2012
@@ -299,6 +315,7 @@ public class Bookshelf {
 			System.out.println("deleteWriter:virhe");
 		}
 	}
+
 	public static String[] getWriters() {
 		try {
 			return tk.getWriters();
@@ -309,6 +326,7 @@ public class Bookshelf {
 		return null;
 
 	}
+
 	/**
 	 * This method return all books in one String array
 	 * 
@@ -324,8 +342,19 @@ public class Bookshelf {
 		return null;
 
 	}
+
 	public static void suljeYhteys() {
 		System.out.println("");
 		tk.suljeYhteys();
+	}
+
+	/**
+	 * This updates both lists in main window
+	 * 
+	 * @since 10.4.2015
+	 */
+	public static void updateLists() {
+		System.out.println("toosa.UpdateJButtonClick() happens");
+		toosa.UpdateJButtonClick();
 	}
 }
