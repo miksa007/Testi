@@ -2,7 +2,9 @@ github test Project
 
 HOWTO TEST
 	Bookshelf has the main method
-	Application use MySQL database.(mysql-connector-java... need)
+	Application use MariaDB database.(org.mariadb.jdbc.Driver needed)
+	Database user librarian. Password salasana
+	Schema Bookshelf(these are in Tietokanta.java)
 
 version 0.80	10.4.2015
 	The main issue was list update automation when user add book or writer. 
