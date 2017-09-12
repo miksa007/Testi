@@ -56,6 +56,7 @@ public class Bookshelf {
 			// tk.luoWriterTaulu();
 		} catch (Exception e) {
 			System.out.println("Bookshelf: error");
+			
 		}
 	}
 

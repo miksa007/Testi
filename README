@@ -6,6 +6,8 @@ HOWTO TEST
 	Database user librarian. Password salasana
 	Schema Bookshelf(these are in Tietokanta.java)
 
+version 0.81	12.9.2017
+	Minor documentation for connector-java errors
 version 0.80	10.4.2015
 	The main issue was list update automation when user add book or writer. 
 	About -dialog added(There should be also this version number).

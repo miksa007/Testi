@@ -34,14 +34,25 @@ public class Tietokanta {
 			//this is for MariaDB
 			Class.forName("org.mariadb.jdbc.Driver").newInstance();
 		} catch (Exception e) {
+			System.out.println("The mariadb-java-client-*.*.*.jar doesn't exist");
+			System.out.println("Download it from https://downloads.mariadb.org/connector-java/");
+			System.out.println("and include it to build path");
+			
 			e.printStackTrace();
+			
 			throw new Exception(
 					"createConnection: JDBC-ajurin rekisterainti epaonnistui.");
+			
 		}
 		try {
 			// String url = "jdbc:mysql://localhost/olioJavatesti";
-			String url = "jdbc:mysql://localhost/" + schema;
+			//String url = "jdbc:mysql://localhost/" + schema;
+			
+			String url="jdbc:mysql://";//+palvelimen_ip_osoite;
 			con = DriverManager.getConnection(url, user, pass);
+			
+			//con = DriverManager.getConnection(url, miksa,)
+			
 		} catch (SQLException se) {
 			se.printStackTrace();
 			System.out.println("createConnection: Login error");
